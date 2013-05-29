@@ -15,7 +15,6 @@ import com.jason.framework.orm.Page;
 public class UserInfoServiceImpl implements UserInfoService {
 	
 	private UserInfoRepository userInfoRepository;
-
 	@Autowired
 	public void setUserInfoRepository(UserInfoRepository userInfoRepository) {
 		this.userInfoRepository = userInfoRepository;

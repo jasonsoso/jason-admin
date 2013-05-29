@@ -8,7 +8,6 @@ import com.jason.framework.orm.Page;
 
 public interface AuthorityService {
 
-
 	Authority get(String id);
 
 	void store(Authority entity);

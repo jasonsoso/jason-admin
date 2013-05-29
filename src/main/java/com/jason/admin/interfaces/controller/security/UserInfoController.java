@@ -24,8 +24,6 @@ import com.jason.framework.orm.hibernate.query.HQLQuery;
 import com.jason.framework.web.support.ControllerSupport;
 
 
-
-
 /**
  * 
  * 用户管理的Controller, 使用Restful风格的Urls:
@@ -148,10 +146,11 @@ public class UserInfoController extends ControllerSupport {
 										entity.getRoleMap().values(),
 										Role.class
 									);
-
-			if (passwordHasModified(origPassword, entity.getPassword())) {/* user has modified password*/
+			/* user has modified password*/
+			if (passwordHasModified(origPassword, entity.getPassword())) {
 				entity.encodePassword(origPassword);
-			} else { /* user didnot want to modify password*/
+			} else { 
+				/* user didnot want to modify password*/
 				entity.setPassword(origPassword);
 			}
 			userInfoService.store(entity);

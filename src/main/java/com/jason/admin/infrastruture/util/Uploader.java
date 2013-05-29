@@ -43,12 +43,13 @@ public class Uploader {
 	// 文件大小限制，单位KB
 	private int maxSize = 10000;
 	
-	private HashMap<String, String> errorInfo = new HashMap<String, String>();
+	private Map<String, String> errorInfo = new HashMap<String, String>();
 
 	public Uploader(HttpServletRequest request) {
 		this.request = request;
-		HashMap<String, String> tmp = this.errorInfo;
-		tmp.put("SUCCESS", "SUCCESS"); //默认成功
+		Map<String, String> tmp = this.errorInfo;
+		//默认成功
+		tmp.put("SUCCESS", "SUCCESS"); 
 		tmp.put("NOFILE", "未包含文件上传域");
 		tmp.put("TYPE", "不允许的文件格式");
 		tmp.put("SIZE", "文件大小超出限制");
@@ -171,7 +172,7 @@ public class Uploader {
 	 * @return string
 	 */
 	private String getFileExt(String fileName) {
-		return fileName.substring(fileName.lastIndexOf("."));
+		return fileName.substring(fileName.lastIndexOf('.'));
 	}
 
 	/**

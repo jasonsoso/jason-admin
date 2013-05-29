@@ -39,17 +39,16 @@ public class HomeController {
 	
 	private final Logger logger = LoggerFactory.getLogger(getClass());
 	
-	/**
-	 * Simply selects the home view to render by returning its name.
-	 */
 	@RequestMapping(value="/admin/dashboard/", method=RequestMethod.GET)
 	public String admin() {
 		return "admin/index";
 	}
+	
 	@RequestMapping(value = "/admin/deny/")
 	public String deny() {
 		return "admin/deny";
 	}
+	
 	@RequestMapping(value="/login", method=RequestMethod.GET)
 	public String login() {
 		return "login";
@@ -74,16 +73,12 @@ public class HomeController {
 		}
 
 		try {
-
-			//checkCaptcha(request, session);
 			AuthenticationToken token = createToken(request);
-
 			subject.login(token);
 		} catch (Exception e) {
 			logger.error("login occur exception.", e);
 			return "redirect:/login?code=" + translateException(e);
 		}
-
 		return "redirect:/admin/dashboard/";
 	}
 	@RequestMapping(value = "/admin/logout/", method = { GET, POST })
@@ -95,30 +90,22 @@ public class HomeController {
 	}
 	
 	private int translateException(Exception e) {
-
 		if (e instanceof InvalidCaptchaException) {
 			return INVALID_CAPTCHA_ERROR_CODE;
 		}
-
 		if (e instanceof UnknownAccountException) {
 			return UNKNOWN_ACCOUT_ERROR_CODE;
 		}
-
 		if (e instanceof LockedAccountException) {
 			return LOCKED_ACCOUT_ERROR_CODE;
 		}
-
 		if (e instanceof AuthenticationException) {
 			return AUTHENTICATION_ERROR_CODE;
 		}
-
 		return OTHER_ERROR_CODE;
 	}
-	/*private void checkCaptcha(HttpServletRequest request, HttpSession session) {
-		String captchaCode = WebUtils.getCleanParam(request, "captcha");
-		HttpCaptchaUtils.checkCaptcha(captchaCode, session);
-	}*/
-	
+
+
 	private AuthenticationToken createToken(HttpServletRequest request) {
 		String username = WebUtils.getCleanParam(request, "username");
 		String password = WebUtils.getCleanParam(request, "password");

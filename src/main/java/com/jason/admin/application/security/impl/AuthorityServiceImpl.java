@@ -16,7 +16,6 @@ import com.jason.framework.orm.Page;
 public class AuthorityServiceImpl implements AuthorityService {
 
 	private AuthorityRepository authorityRepository;
-
 	@Autowired
 	public void setAuthorityRepository(AuthorityRepository authorityRepository) {
 		this.authorityRepository = authorityRepository;
