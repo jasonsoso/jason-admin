@@ -1,43 +1,50 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
-	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:context="http://www.springframework.org/schema/context"
-	xsi:schemaLocation="
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+    xmlns:tx="http://www.springframework.org/schema/tx" xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:util="http://www.springframework.org/schema/util"
+    xsi:schemaLocation="
      http://www.springframework.org/schema/beans 
      http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
      http://www.springframework.org/schema/context 
-     http://www.springframework.org/schema/context/spring-context-3.0.xsd"
-	default-lazy-init="true">
+     http://www.springframework.org/schema/context/spring-context-3.0.xsd
+     http://www.springframework.org/schema/util  
+     http://www.springframework.org/schema/util/spring-util-3.0.xsd"
+    default-lazy-init="true">
 	
 	<!-- Shiro Filter -->
 	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
     	<property name="securityManager" ref="securityManager"/>
-    	<!-- 要求登录时的链接 -->
-	    <property name="loginUrl" value="/login" />
-	    <!-- 登陆成功后要跳转的连接 
-        <property name="successUrl" value="/index" />
-        -->
+	    <property name="loginUrl" value="${sso.loginurlpre}/login?service=${sso.currurlpre}/shiro-cas" /> 
+	     
+	     <!-- 要求登录时的链接 
+        <property name="loginUrl" value="/login" />-->
+	    <!-- 登陆成功后要跳转的连接 -->
+        <property name="successUrl" value="/admin/dashboard/" />
+        
 	    <!-- 未授权时要跳转的连接 -->
 	    <property name="unauthorizedUrl" value="/admin/deny/" />
-	    <!-- The 'filters' property is not necessary since any declared javax.servlet.Filter bean  -->
-	    <!-- defined will be automatically acquired and available via its beanName in chain        -->
-	    <!-- definitions, but you can perform instance overrides or name aliases here if you like: -->
-	    <!-- <property name="filters">
+
+	    <property name="filters">
 	        <util:map>
-	            <entry key="anAlias" value-ref="someFilter"/>
+	            <!-- 添加casFilter到shiroFilter -->  
+                <entry key="casFilter" value-ref="casFilter"/>  
 	        </util:map> 
-	        
-	    </property> -->
+	    </property>
     	<property name="filterChainDefinitions">
         	<value>
+                /shiro-cas** = casFilter
+                /logout** = logout
+                
 	            /admin/** = authc
 	            
-	            #/security/** = authc,roles[admin]
+	            /security/** = authc,roles[admin]
 	            
-	            /security/authority/list** = authc,perms[authority:list]
-	            /security/authority/create** = authc,perms[authority:create]
-	            /security/authority/edit/** = authc,perms[authority:edit]
-	            /security/authority/delete/** = authc,perms[authority:delete]
+	             #/security/authority/list** = authc,perms[authority:list]
+	             #/security/authority/create** = authc,perms[authority:create]
+	             #/security/authority/edit/** = authc,perms[authority:edit]
+	             #/security/authority/delete/** = authc,perms[authority:delete]
 	           
+	            
 	            
 	            # more URL-to-FilterChain definitions here
 	            
@@ -46,13 +53,20 @@
     	</property>
 	</bean>
 	
-	<bean id="myRealm" class="com.jason.admin.infrastruture.shiro.MyRealm" >
+	<bean id="casFilter" class="org.apache.shiro.cas.CasFilter">  
+        <!-- 配置验证错误时的失败页面  -->  
+        <property name="failureUrl" value="/common/error.jsp"/>  
+    </bean>  
+    
+	<bean id="realm" class="com.jason.admin.infrastruture.shiro.MyCasRealm" >
 	   <property name="cacheManager" ref="shiroCacheManager"/> 
+	   <property name="casServerUrlPrefix" value="${sso.loginurlpre}"/>  
+       <property name="casService" value="${sso.currurlpre}/shiro-cas"/>  
 	</bean>
 	
 	<!-- Shiro's main business-tier object for web-enabled applications -->
 	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager" >
-    	<property name="realm" ref="myRealm"/>
+    	<property name="realm" ref="realm"/>
 	</bean>
 	<!-- 用户授权信息Cache, 采用EhCache -->
 	<bean id="shiroCacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager">
