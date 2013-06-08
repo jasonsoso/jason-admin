@@ -28,12 +28,13 @@
 	        <util:map>
 	            <!-- 添加casFilter到shiroFilter -->  
                 <entry key="casFilter" value-ref="casFilter"/>  
+                <entry key="logoutFilter" value-ref="logoutFilter" />
 	        </util:map> 
 	    </property>
     	<property name="filterChainDefinitions">
         	<value>
                 /shiro-cas** = casFilter
-                /logout** = logout
+                /logout** = logoutFilter
                 
 	            /admin/** = authc
 	            
@@ -56,6 +57,11 @@
 	<bean id="casFilter" class="org.apache.shiro.cas.CasFilter">  
         <!-- 配置验证错误时的失败页面  -->  
         <property name="failureUrl" value="/common/error.jsp"/>  
+    </bean>
+    
+    <bean  id="logoutFilter" class="org.apache.shiro.web.filter.authc.LogoutFilter">  
+    	<!--LogoutFilter清除了应用的cookie/session后，还要重定向到sso-server清除票据的cookie/session等-->
+        <property name="redirectUrl" value="${sso.loginurlpre}/logout?service=${sso.currurlpre}/admin"/>  
     </bean>  
     
 	<bean id="realm" class="com.jason.admin.infrastruture.shiro.MyCasRealm" >
