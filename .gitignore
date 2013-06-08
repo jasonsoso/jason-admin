@@ -7,3 +7,4 @@ target/
 classes/
 lib/
 .DS_Store
+.log

@@ -80,6 +80,11 @@
 		    <artifactId>shiro-ehcache</artifactId>
 		    <version>${org.apache.shiro-version}</version>
 		</dependency>
+		<dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-cas</artifactId>
+            <version>${org.apache.shiro-version}</version>
+        </dependency>
 
 		<!-- Test -->
 		<dependency>
@@ -95,7 +100,12 @@
 			<scope>test</scope>
 		</dependency>
 
-		 
+
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>12.0</version>
+		</dependency>
 	</dependencies>
 	<repositories>
 	   <repository>
