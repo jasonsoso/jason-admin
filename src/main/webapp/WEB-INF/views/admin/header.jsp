@@ -16,7 +16,7 @@
             <p class="navbar-text pull-right">
              	 亲！欢迎你:<a href="#" class="navbar-link"><shiro:principal></shiro:principal></a>
     			&nbsp; | &nbsp;
-    			<a href="${ctx}/admin/logout/" data-method="delete" rel="nofollow"><span class="label label-important">退出</span></a>
+    			<a href="${ctx}/logout" data-method="delete" rel="nofollow"><span class="label label-important">退出</span></a>
             </p>
             <ul class="nav">
               <li class="active"><a href="#">首页</a></li>
