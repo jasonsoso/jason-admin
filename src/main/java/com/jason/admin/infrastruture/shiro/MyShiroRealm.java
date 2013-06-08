@@ -21,7 +21,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.jason.admin.domain.security.user.UserInfo;
 import com.jason.admin.domain.security.user.UserInfoRepository;
 
-public class MyRealm extends AuthorizingRealm {
+/**
+ * 
+ * @author Jason
+ *
+ */
+public class MyShiroRealm extends AuthorizingRealm {
 
 	@Autowired
 	private UserInfoRepository userInfoRepository;
