@@ -65,7 +65,7 @@
         
       </div><!--/row-->
 
-      <hr>
+      <hr />
 
 <%@include file="/WEB-INF/views/admin/footer.jsp" %>
 

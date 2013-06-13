@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="GB2312" ?>
+<taglib xmlns="http://java.sun.com/xml/ns/j2ee"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_0.xsd"
+  version="2.0">
+   
+  <description>Jason</description>
+  <display-name>Jason functions</display-name>
+  <tlib-version>1.1</tlib-version>
+  <short-name>jason</short-name>
+
+  <function>
+    <description>
+      	URL编码
+    </description>
+    <name>urlEncode</name>
+    <function-class>com.jason.framework.util.EncodeUtils</function-class>
+    <function-signature>java.lang.String urlEncode(java.lang.String)</function-signature>
+    <example>
+      ${jason:urlEncode('杰森')}
+    </example>
+  </function>
+  <function>
+    <description>
+      	URL解码
+    </description>
+    <name>urlDecode</name>
+    <function-class>com.jason.framework.util.EncodeUtils</function-class>
+    <function-signature>java.lang.String urlDecode(java.lang.String)</function-signature>
+    <example>
+      ${jason:urlDecode('%E6%9D%B0%E6%A3%AE')}
+    </example>
+  </function>
+  
+  <function>
+    <description>
+                    获取配置文件信息
+    </description>
+    <name>getEntryValue</name>
+    <function-class>com.jason.framework.util.PropertiesUtils</function-class>
+    <function-signature>java.lang.String getEntryValue(java.lang.String)</function-signature>
+    <example>
+      ${jason:getEntryValue('sso.loginurlpre')}
+    </example>
+  </function>
+  
+</taglib>

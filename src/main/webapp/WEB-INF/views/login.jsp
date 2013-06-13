@@ -2,109 +2,68 @@
 
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="utf-8">
     <title>登录 杰森博客 管理后台</title>
     <%@include file="/common/taglibs.jsp" %>
     <%@include file="/common/common-header.jsp" %>
+    
+<link href="${ctx }/resources/css/login.css" rel="stylesheet">
 
-    <style type="text/css">
-      body {
-        padding-top: 40px;
-        padding-bottom: 40px;
-        background-color: #f5f5f5;
-      }
+    
+</head>
+<body>
 
-      .form-signin {
-        max-width: 300px;
-        padding: 19px 29px 29px;
-        margin: 0 auto 20px;
-        background-color: #fff;
-        border: 1px solid #e5e5e5;
-        -webkit-border-radius: 5px;
-           -moz-border-radius: 5px;
-                border-radius: 5px;
-        -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.05);
-           -moz-box-shadow: 0 1px 2px rgba(0,0,0,.05);
-                box-shadow: 0 1px 2px rgba(0,0,0,.05);
-      }
-      .form-signin .form-signin-heading,
-      .form-signin .checkbox {
-        margin-bottom: 10px;
-      }
-      .form-signin input[type="text"],
-      .form-signin input[type="password"] {
-        font-size: 16px;
-        height: auto;
-        margin-bottom: 15px;
-        padding: 7px 9px;
-      }
-      .user_text{ height:18px; line-height:18px; padding-left:70px; width: 210px; float:left; margin-top:5px;color:red;}
+<!-- 导入头部 -->
+<%@include file="/WEB-INF/views/admin/header.jsp" %>
 
-    </style>
-   
-    </head>
 
-  <body>
-
-    <div class="container">
-
-      <form class="form-signin" action="${ctx }/login" method="post">
-        <h2 class="form-signin-heading">请 登 录 ...</h2>
-        <input type="text" id="username" name="username" class="input-block-level" placeholder="账号/邮箱">
-        <input type="password" id="password" name="password" class="input-block-level" placeholder="密码">
-         
-		 <div align="center" >
-		    <button class="btn btn-large" type="submit">登  录</button>
+ <!-- Carousel
+    ================================================== -->
+    <div id="myCarousel" class="carousel slide">
+      <div class="carousel-inner">
+        <div class="item active">
+          <img src="${ctx}/resources/bootstrap/img/examples/slide-01.jpg" alt="">
+          <div class="container">
+            <div class="carousel-caption">
+              <h1>Example headline.</h1>
+              <p class="lead">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+              <a class="btn btn-large btn-primary" href="#">Sign up today</a>
+            </div>
           </div>
-        
-        <div class="user_text" id="showError">&nbsp;</div>
-      </form>
+        </div>
+        <div class="item">
+          <img src="${ctx}/resources/bootstrap/img/examples/slide-02.jpg" alt="">
+          <div class="container">
+            <div class="carousel-caption">
+              <h1>Another example headline.</h1>
+              <p class="lead">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+              <a class="btn btn-large btn-primary" href="#">Learn more</a>
+            </div>
+          </div>
+        </div>
+        <div class="item">
+          <img src="${ctx}/resources/bootstrap/img/examples/slide-03.jpg" alt="">
+          <div class="container">
+            <div class="carousel-caption">
+              <h1>One more for good measure.</h1>
+              <p class="lead">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+              <a class="btn btn-large btn-primary" href="#">Browse gallery</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <a class="left carousel-control" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+      <a class="right carousel-control" href="#myCarousel" data-slide="next">&rsaquo;</a>
+    </div><!-- /.carousel -->
+    
 
-    </div> <!-- /container -->
-
+      <hr />
+      <%@include file="/WEB-INF/views/admin/footer.jsp" %>
+      
 <%@include file="/common/common-footer.jsp" %>
 <script type="text/javascript">
 	
-	$(document).ready(function(){
-		$("#username").focus();
-		
-		var error = '${param.code}';
-		if(error.length > 0){
-			try{
-				var errorCode = parseInt(error);
-				
-				switch(errorCode){
-					case 1:
-						showError("无效的用户名密码！");
-						$("#username").focus();
-						break;
-					case 2:
-						showError("该用户已被锁定！");
-						break;
-					case 4:
-						showError("无效的用户名密码！");
-						$("#username").focus();
-                        break;
-					case 8:
-		                showError("验证码错误！");
-		                $("#captcha").focus();
-		                break;
-					default:
-						$("#username").focus();
-						showError("登陆失败，请重新尝试");
-						break;
-				}
-			}catch(e){
-				$("#username").focus();
-				showError("登陆失败，请重新尝试");
-			}
-		}
-	});
-	
-	function showError(msg){
-		$("#showError").empty().append("&nbsp;"+msg);
-	}
 </script>
 
   </body>

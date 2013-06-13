@@ -10,13 +10,21 @@
           </a>
           <a class="brand" href="/" style="padding: 5px 20px 5px;">
           	<img class="img-rounded" width="30" height="30" alt="" src="${ctx}/resources/bootstrap/ico/login.png">
-          	杰森博客 后台管理
+          	杰森 后台管理
           </a>
           <div class="nav-collapse collapse">
             <p class="navbar-text pull-right">
-             	 亲！欢迎你:<a href="#" class="navbar-link"><shiro:principal></shiro:principal></a>
-    			&nbsp; | &nbsp;
-    			<a href="${ctx}/logout" data-method="delete" rel="nofollow"><span class="label label-important">退出</span></a>
+                <shiro:authenticated>
+                                                                  亲！欢迎你:<a href="#" class="navbar-link"><shiro:principal></shiro:principal></a>
+                    &nbsp; | &nbsp;
+                    <a href="${ctx}/logout?service=http://admin.jasonsoso.com:8080/admin/" data-method="delete" rel="nofollow"><span class="label label-important">退出</span></a>
+                
+                </shiro:authenticated>
+                <shiro:notAuthenticated>
+                                                                    亲！欢迎来杰森！
+                     <a href="${jason:getEntryValue('sso.loginurlpre')}/login?service=${jason:getEntryValue('sso.currurlpre')}/shiro-cas" data-method="delete" rel="nofollow"><span class="label label-important">请登录</span></a>
+                </shiro:notAuthenticated>
+             	 
             </p>
             <ul class="nav">
               <li class="active"><a href="#">首页</a></li>

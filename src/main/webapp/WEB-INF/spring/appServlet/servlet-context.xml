@@ -60,7 +60,12 @@
         <!-- freemarker自定义标签 -->
         <beans:property name="freemarkerVariables">
             <beans:map>
-                
+                <beans:entry key="jason_user_icon">
+                    <beans:bean class="com.jason.framework.web.directive.freemarker.UserIconDirective"></beans:bean>
+                </beans:entry>
+                <beans:entry key="jason_properties">
+                    <beans:bean class="com.jason.framework.web.directive.freemarker.PropertiesDirective"></beans:bean>
+                </beans:entry>
             </beans:map>
         </beans:property>
     </beans:bean>

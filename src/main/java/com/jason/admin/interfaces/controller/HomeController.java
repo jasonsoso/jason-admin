@@ -14,11 +14,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class HomeController {
 
-	private static final String REDIRECT_LIST = "redirect:/admin";
 	
 	@RequestMapping(value="/", method=RequestMethod.GET)
 	public String home(){
-		return REDIRECT_LIST;
+		return "login";
+	}
+	
+	@RequestMapping(value="/login", method=RequestMethod.GET)
+	public String login(){
+		return "login";
 	}
 	
 	@RequestMapping(value="/admin", method=RequestMethod.GET)
