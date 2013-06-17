@@ -7,9 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.jason.admin.application.security.RoleService;
-import com.jason.admin.domain.security.role.Role;
 import com.jason.admin.domain.security.role.RoleRepository;
 import com.jason.framework.orm.Page;
+import com.jason.security.model.Role;
 
 @Transactional
 public class RoleServiceImpl implements RoleService {

@@ -13,12 +13,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.jason.admin.application.security.AuthorityService;
-import com.jason.admin.domain.security.authority.Authority;
 import com.jason.framework.domain.EntityUtils;
 import com.jason.framework.orm.Page;
 import com.jason.framework.orm.hibernate.query.HQLQuery;
 import com.jason.framework.orm.hibernate.query.HQLQuery.MatchType;
 import com.jason.framework.web.support.ControllerSupport;
+import com.jason.security.model.Authority;
 
 
 @Controller

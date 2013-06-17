@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.jason.framework.orm.Page;
+import com.jason.security.model.Authority;
 
 
 

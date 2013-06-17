@@ -3,8 +3,8 @@ package com.jason.admin.application.security;
 import java.util.List;
 import java.util.Map;
 
-import com.jason.admin.domain.security.role.Role;
 import com.jason.framework.orm.Page;
+import com.jason.security.model.Role;
 
 
 public interface RoleService {

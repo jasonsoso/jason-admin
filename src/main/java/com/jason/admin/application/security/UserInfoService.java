@@ -3,8 +3,8 @@ package com.jason.admin.application.security;
 import java.util.List;
 import java.util.Map;
 
-import com.jason.admin.domain.security.user.UserInfo;
 import com.jason.framework.orm.Page;
+import com.jason.security.model.UserInfo;
 
 
 public interface UserInfoService {
@@ -15,7 +15,7 @@ public interface UserInfoService {
 
 	UserInfo get(Long id);
 
-	UserInfo queryByName(String username);
+	//UserInfo queryByName(String username);
 
 	List<UserInfo> query(String queryString, Object... values);
 

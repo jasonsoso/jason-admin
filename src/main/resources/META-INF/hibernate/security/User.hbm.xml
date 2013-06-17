@@ -5,7 +5,7 @@
   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping default-access="field">
-  <class name="com.jason.admin.domain.security.user.UserInfo" table="security_user" lazy="false">
+  <class name="com.jason.security.model.UserInfo" table="security_user" lazy="false">
 	<cache usage="read-write" region="org.hibernate.cache.StandardQueryCache"/>
     <id name="id" column="id">
       <generator class="native"/>
@@ -23,7 +23,7 @@
     
     <set name="roles" lazy="false" table="security_user_role" fetch="join">
     	<key column="user_id"></key>
-    	<many-to-many class="com.jason.admin.domain.security.role.Role" column="role_id"></many-to-many>
+    	<many-to-many class="com.jason.security.model.Role" column="role_id"></many-to-many>
     </set>
   </class>
 </hibernate-mapping>

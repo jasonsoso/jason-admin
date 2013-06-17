@@ -7,9 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.jason.admin.application.security.UserInfoService;
-import com.jason.admin.domain.security.user.UserInfo;
 import com.jason.admin.domain.security.user.UserInfoRepository;
 import com.jason.framework.orm.Page;
+import com.jason.security.model.UserInfo;
 
 @Transactional
 public class UserInfoServiceImpl implements UserInfoService {
@@ -45,10 +45,10 @@ public class UserInfoServiceImpl implements UserInfoService {
 		return userInfoRepository.queryPage(page, hql, values);
 	}
 
-	@Override
-	public UserInfo queryByName(String username) {
-		return userInfoRepository.queryByName(username);
-	}
+	//@Override
+	//public UserInfo queryByName(String username) {
+	//	return userInfoRepository.queryByName(username);
+	//}
 
 	@Override
 	public void updatePhoto(String photo, UserInfo user) {

@@ -4,9 +4,10 @@ import java.util.List;
 import java.util.Map;
 
 import com.jason.framework.orm.Page;
+import com.jason.security.model.UserInfo;
 
 public interface UserInfoRepository {
-	UserInfo queryByName(String username);
+	//UserInfo queryByName(String username);
 
 	Page<UserInfo> queryPage(Page<UserInfo> page, String hql, Map<String, Object> values);
 

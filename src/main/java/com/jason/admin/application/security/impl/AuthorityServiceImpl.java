@@ -7,9 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.jason.admin.application.security.AuthorityService;
-import com.jason.admin.domain.security.authority.Authority;
 import com.jason.admin.domain.security.authority.AuthorityRepository;
 import com.jason.framework.orm.Page;
+import com.jason.security.model.Authority;
 
 
 @Transactional

@@ -15,8 +15,8 @@
 	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
     	<property name="securityManager" ref="securityManager"/>
 	    <property name="loginUrl" value="${sso.loginurlpre}/login?service=${sso.currurlpre}/shiro-cas" /> 
-	     
-	     <!-- 要求登录时的链接 
+
+	    <!-- 要求登录时的链接 
         <property name="loginUrl" value="/login" />-->
 	    <!-- 登陆成功后要跳转的连接 -->
         <property name="successUrl" value="/admin/" />
@@ -45,8 +45,6 @@
 	             #/security/authority/edit/** = authc,perms[authority:edit]
 	             #/security/authority/delete/** = authc,perms[authority:delete]
 	           
-	            
-	            
 	            # more URL-to-FilterChain definitions here
 	            
 	            /** = anon
@@ -64,7 +62,7 @@
         <property name="redirectUrl" value="${sso.loginurlpre}/logout?service=${sso.currurlpre}"/>  
     </bean>  
     
-	<bean id="realm" class="com.jason.admin.infrastruture.shiro.MyCasRealm" >
+	<bean id="realm" class="com.jason.security.realm.MyCasRealm" >
 	   <property name="cacheManager" ref="shiroCacheManager"/> 
 	   <property name="casServerUrlPrefix" value="${sso.loginurlpre}"/>  
        <property name="casService" value="${sso.currurlpre}/shiro-cas"/>  

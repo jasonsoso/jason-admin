@@ -14,13 +14,13 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.jason.admin.application.security.AuthorityService;
 import com.jason.admin.application.security.RoleService;
-import com.jason.admin.domain.security.authority.Authority;
-import com.jason.admin.domain.security.role.Role;
 import com.jason.framework.domain.EntityUtils;
 import com.jason.framework.orm.Page;
 import com.jason.framework.orm.hibernate.HibernateHelper;
 import com.jason.framework.orm.hibernate.query.HQLQuery;
 import com.jason.framework.web.support.ControllerSupport;
+import com.jason.security.model.Authority;
+import com.jason.security.model.Role;
 
 
 @Controller
