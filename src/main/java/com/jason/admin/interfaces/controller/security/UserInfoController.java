@@ -1,5 +1,7 @@
 package com.jason.admin.interfaces.controller.security;
 
+import java.util.Date;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
@@ -19,6 +21,7 @@ import com.jason.framework.domain.EntityUtils;
 import com.jason.framework.orm.Page;
 import com.jason.framework.orm.hibernate.HibernateHelper;
 import com.jason.framework.orm.hibernate.query.HQLQuery;
+import com.jason.framework.util.MD5Utils;
 import com.jason.framework.web.support.ControllerSupport;
 import com.jason.security.model.Role;
 import com.jason.security.model.UserInfo;
@@ -103,7 +106,7 @@ public class UserInfoController extends ControllerSupport {
 									entity.getRoleMap().values(),
 									Role.class
 								);
-		entity.encodePassword(entity.getPassword());
+		entity.encodePassword(MD5Utils.encode(entity.getPassword()));
 		userInfoService.store(entity);
 		
 		success(redirectAttributes,"创建用户成功！"); 
@@ -148,14 +151,16 @@ public class UserInfoController extends ControllerSupport {
 									);
 			/* user has modified password*/
 			if (passwordHasModified(origPassword, entity.getPassword())) {
-				entity.encodePassword(origPassword);
+				entity.encodePassword(MD5Utils.encode(entity.getPassword()));
 			} else { 
 				/* user didnot want to modify password*/
 				entity.setPassword(origPassword);
 			}
+			entity.setUpdatedAt(new Date());
 			userInfoService.store(entity);
 			success(redirectAttributes,"用户修改成功！");
 		} catch (Exception e) {
+			this.getLogger().error("修改用户出错！", e);
 			error(redirectAttributes,"修改用户失败，请核实数据后重新提交！");
 		}
 		return REDIRECT_LIST;
@@ -199,6 +204,7 @@ public class UserInfoController extends ControllerSupport {
 	
 	/**
 	 * password is modified
+	 * 
 	 * @param origPassword
 	 * @param newPassword
 	 * @return

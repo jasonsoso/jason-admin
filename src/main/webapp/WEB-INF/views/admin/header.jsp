@@ -17,7 +17,7 @@
                 <shiro:authenticated>
                                                                   亲！欢迎你:<a href="#" class="navbar-link"><shiro:principal></shiro:principal></a>
                     &nbsp; | &nbsp;
-                    <a href="${ctx}/logout?service=http://admin.jasonsoso.com:8080/admin/" data-method="delete" rel="nofollow"><span class="label label-important">退出</span></a>
+                    <a href="${ctx}/logout?service=${jason:getEntryValue('sso.currurlpre')}/admin/" data-method="delete" rel="nofollow"><span class="label label-important">退出</span></a>
                 
                 </shiro:authenticated>
                 <shiro:notAuthenticated>
