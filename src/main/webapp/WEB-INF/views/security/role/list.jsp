@@ -54,7 +54,7 @@
 
 			<form id="myForm" action="${ctx }/security/role/list" method="get">
 			<!-- 搜索 -->
-			  <input type="text" name="name" class="input-small search-query" placeholder="名称">
+			  <input type="text" name="name" value="${param.name }" class="input-small search-query" placeholder="名称">
 			  <button type="submit" class="btn">搜索</button>
 			
 			<table class="table table-striped ">
@@ -93,7 +93,9 @@
 				</form>
 				
 				<div class="pagination pagination-centered">
-					<%@include file="/common/page.jsp" %>
+					<jsp:include page="/common/page.jsp">
+                        <jsp:param value="&name=${param.name }" name="searchParam"/>
+                    </jsp:include>
 				</div>
           
         </div>
