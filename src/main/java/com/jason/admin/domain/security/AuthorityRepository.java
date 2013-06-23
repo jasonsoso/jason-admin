@@ -1,11 +1,10 @@
-package com.jason.admin.domain.security.authority;
+package com.jason.admin.domain.security;
 
 import java.util.List;
 import java.util.Map;
 
 import com.jason.framework.orm.Page;
 import com.jason.security.model.Authority;
-
 
 
 public interface AuthorityRepository {

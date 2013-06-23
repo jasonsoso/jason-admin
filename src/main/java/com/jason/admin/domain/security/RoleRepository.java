@@ -1,4 +1,4 @@
-package com.jason.admin.domain.security.role;
+package com.jason.admin.domain.security;
 
 import java.util.List;
 import java.util.Map;
