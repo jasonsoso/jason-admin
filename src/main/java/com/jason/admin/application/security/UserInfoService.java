@@ -15,12 +15,22 @@ public interface UserInfoService {
 
 	UserInfo get(Long id);
 
-	//UserInfo queryByName(String username);
+	/**
+	 * 根据用户名查询用户对象
+	 * @param username
+	 * @return
+	 */
+	UserInfo queryByName(String username);
 
 	List<UserInfo> query(String queryString, Object... values);
 
 	Page<UserInfo> queryPage(Page<UserInfo> page, String hql, Map<String, Object> values);
 
+	/**
+	 * 更新用户的头像路径
+	 * @param photo
+	 * @param user
+	 */
 	void updatePhoto(String photo,UserInfo user);
 
 }

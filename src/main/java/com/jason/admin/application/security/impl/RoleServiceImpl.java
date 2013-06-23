@@ -4,21 +4,20 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.jason.admin.application.security.RoleService;
-import com.jason.admin.domain.security.role.RoleRepository;
+import com.jason.admin.domain.security.RoleRepository;
 import com.jason.framework.orm.Page;
 import com.jason.security.model.Role;
 
+@Service
 @Transactional
 public class RoleServiceImpl implements RoleService {
 	
-	private RoleRepository roleRepository;
 	@Autowired
-	public void setRoleRepository(RoleRepository roleRepository) {
-		this.roleRepository = roleRepository;
-	}
+	private RoleRepository roleRepository;
 
 	@Override
 	public void delete(String id) {

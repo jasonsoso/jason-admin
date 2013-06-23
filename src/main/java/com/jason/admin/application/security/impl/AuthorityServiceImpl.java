@@ -4,23 +4,21 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.jason.admin.application.security.AuthorityService;
-import com.jason.admin.domain.security.authority.AuthorityRepository;
+import com.jason.admin.domain.security.AuthorityRepository;
 import com.jason.framework.orm.Page;
 import com.jason.security.model.Authority;
 
-
+@Service
 @Transactional
 public class AuthorityServiceImpl implements AuthorityService {
 
-	private AuthorityRepository authorityRepository;
 	@Autowired
-	public void setAuthorityRepository(AuthorityRepository authorityRepository) {
-		this.authorityRepository = authorityRepository;
-	}
-
+	private AuthorityRepository authorityRepository;
+	
 	@Override
 	public Authority get(String id) {
 		return authorityRepository.get(id);
