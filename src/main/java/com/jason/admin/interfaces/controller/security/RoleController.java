@@ -26,7 +26,10 @@ import com.jason.security.model.Role;
 @Controller
 @RequestMapping(value = "/security/role")
 public class RoleController extends ControllerSupport {
+	
 	private static final String REDIRECT_LIST = "redirect:/security/role/list";
+	private static final String FORM = "security/role/form";
+	private static final String LIST = "security/role/list";
 	
 	@Autowired
 	private RoleService roleService;
@@ -47,7 +50,7 @@ public class RoleController extends ControllerSupport {
 		
 		page = roleService.queryPage(page, query.hql(), query.values());
 		model.addAttribute(page);
-		return "security/role/list";
+		return LIST;
 	}
 
 	/**
@@ -58,7 +61,7 @@ public class RoleController extends ControllerSupport {
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public String create(Model model) {
 		model.addAttribute(new Role()).addAttribute("authorityList", authorityService.query("from Authority"));
-		return "security/role/form";
+		return FORM;
 	}
 
 	/**
@@ -72,7 +75,7 @@ public class RoleController extends ControllerSupport {
 		if (result.hasErrors()) {
 			model.addAttribute("authorityList", authorityService.query("from Authority"));
 			error(model, "创建角色失败，请核对数据!");
-			return "security/role/form";
+			return FORM;
 		}
 
 		HibernateHelper.mergeByIds(
@@ -97,7 +100,7 @@ public class RoleController extends ControllerSupport {
 		model.addAttribute("_method", "put")
 				.addAttribute(roleService.get(id).fillupAuthorityMap())
 				.addAttribute("authorityList", authorityService.query("from Authority"));
-		return "security/role/form";
+		return FORM;
 	}
 
 	/**

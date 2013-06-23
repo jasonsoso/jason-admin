@@ -17,13 +17,11 @@ import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
-
-
-
+import com.jason.framework.web.support.ControllerSupport;
 
 @Controller
 @RequestMapping(value = "/qrcode")
-public class QRCodeController {
+public class QRCodeController extends ControllerSupport{
 
 	@RequestMapping(value="/contents/{contents}/width/{width}/height/{height}", method=RequestMethod.GET)
 	public void qrcode(@PathVariable("contents") String contents,@PathVariable("width") int width,
@@ -42,7 +40,7 @@ public class QRCodeController {
 
             out.flush();
         } catch (Exception e) {  
-            e.printStackTrace();  
+            this.getLogger().error("生成QECode錯誤！", e);
         }finally{
         	out.close();
         }

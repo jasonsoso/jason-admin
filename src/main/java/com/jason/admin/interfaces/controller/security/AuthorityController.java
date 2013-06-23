@@ -24,15 +24,17 @@ import com.jason.security.model.Authority;
 @Controller
 @RequestMapping(value = "/security/authority")
 public class AuthorityController extends ControllerSupport {
+	
 	private static final String REDIRECT_LIST = "redirect:/security/authority/list";
-
+	private static final String FORM = "security/authority/form";
+	private static final String LIST = "security/authority/list";
 	
 	@Autowired
 	private AuthorityService authorityService;
 	
 	/**
-	 * 
 	 * @param page
+	 * @param request
 	 * @param model
 	 * @return
 	 */
@@ -49,7 +51,7 @@ public class AuthorityController extends ControllerSupport {
 		page = authorityService.queryPage(page, query.hql(), query.values());
 		model.addAttribute(page);
 		
-		return "security/authority/list";
+		return LIST;
 	}
 
 	/**
@@ -60,20 +62,22 @@ public class AuthorityController extends ControllerSupport {
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public String create(Model model) {
 		model.addAttribute(new Authority());
-		return "security/authority/form";
+		return FORM;
 	}
 
 	/**
-	 * 
 	 * @param entity
 	 * @param result
+	 * @param model
+	 * @param redirectAttributes
 	 * @return
 	 */
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
-	public String create(@Valid Authority entity, BindingResult result, HttpServletRequest request,Model model,RedirectAttributes redirectAttributes) {
+	public String create(@Valid Authority entity, BindingResult result,Model model,
+			RedirectAttributes redirectAttributes) {
 		if (result.hasErrors()) {
 			error(model, "创建权限失败，请核对数据!");
-			return "security/authority/form";
+			return FORM;
 		}
 
 		authorityService.store(entity);
@@ -91,32 +95,42 @@ public class AuthorityController extends ControllerSupport {
 	public String edit(@PathVariable("id") String id, Model model) {
 		model.addAttribute("_method", "put")
 				.addAttribute(authorityService.get(id));
-		return "security/authority/form";
+		return FORM;
 	}
 
 	/**
-	 * 
 	 * @param id
+	 * @param entity
+	 * @param result
 	 * @param request
+	 * @param model
+	 * @param redirectAttributes
 	 * @return
 	 */
 	@RequestMapping(value = "/edit/{id}", method = RequestMethod.PUT)
-	public String edit(@PathVariable("id") String id, HttpServletRequest request,RedirectAttributes redirectAttributes) {
+	public String edit(@PathVariable("id") String id,@Valid Authority entity, 
+			BindingResult result, HttpServletRequest request,Model model,RedirectAttributes redirectAttributes) {
+		
 		try {
-			Authority entity = authorityService.get(id);
-			bind(request, entity);
+			if (result.hasErrors()) {
+				error(model, "修改权限失败，请核实数据后重新提交！");
+				model.addAttribute("_method", "put");
+				return FORM;
+				
+			}
 			
 			authorityService.store(entity);
 			success(redirectAttributes,"权限修改成功！");
 		} catch (Exception e) {
+			this.getLogger().error("修改权限失败，请核实数据后重新提交！",e);
 			error(redirectAttributes,"修改权限失败，请核实数据后重新提交！");
 		}
 		return REDIRECT_LIST;
 	}
 
 	/**
-	 * 
 	 * @param request
+	 * @param redirectAttributes
 	 * @return
 	 */
 	@RequestMapping(value = "/delete", method = RequestMethod.DELETE)
@@ -132,8 +146,8 @@ public class AuthorityController extends ControllerSupport {
 	}
 
 	/**
-	 * 
 	 * @param id
+	 * @param redirectAttributes
 	 * @return
 	 */
 	@RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)

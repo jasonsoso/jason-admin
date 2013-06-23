@@ -47,6 +47,8 @@ import com.jason.security.model.UserInfo;
 public class UserInfoController extends ControllerSupport {
 	
 	private static final String REDIRECT_LIST = "redirect:/security/user/list";
+	private static final String FORM = "security/user/form";
+	private static final String LIST = "security/user/list";
 	
 	@Autowired
 	private UserInfoService userInfoService;
@@ -75,7 +77,7 @@ public class UserInfoController extends ControllerSupport {
 		}
 		page = userInfoService.queryPage(page, query.hql(), query.values());
 		model.addAttribute(page).addAttribute("roleList", roleService.query("from Role"));
-		return "security/user/list";
+		return 	LIST;
 	}
 
 	/**
@@ -85,7 +87,7 @@ public class UserInfoController extends ControllerSupport {
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public String create(Model model) {
 		model.addAttribute(new UserInfo()).addAttribute("roleList", roleService.query("from Role"));
-		return "security/user/form";
+		return FORM;
 	}
 
 	/**
@@ -99,7 +101,7 @@ public class UserInfoController extends ControllerSupport {
 		if (result.hasErrors()) {
 			model.addAttribute("roleList", roleService.query("from Role"));
 			error(model, "创建用户失败，请核对数据!");
-			return "security/user/form";
+			return FORM;
 		}
 		HibernateHelper.mergeByIds(
 									entity.getRoles(),
@@ -107,6 +109,8 @@ public class UserInfoController extends ControllerSupport {
 									Role.class
 								);
 		entity.encodePassword(MD5Utils.encode(entity.getPassword()));
+		Date now = new Date();
+		entity.setCreatedAt(now).setUpdatedAt(now);
 		userInfoService.store(entity);
 		
 		success(redirectAttributes,"创建用户成功！"); 
@@ -124,7 +128,7 @@ public class UserInfoController extends ControllerSupport {
 		model.addAttribute("_method", "put")
 				.addAttribute(userInfoService.get(id).fillupRoleMap())
 				.addAttribute("roleList", roleService.query("from Role"));
-		return "security/user/form";
+		return FORM;
 	}
 
 	/**
