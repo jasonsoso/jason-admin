@@ -108,8 +108,8 @@ public class AuthorityController extends ControllerSupport {
 	 * @return
 	 */
 	@RequestMapping(value = "/edit/{id}", method = RequestMethod.PUT)
-	public String edit(@PathVariable("id") String id,@Valid Authority entity, 
-			BindingResult result, HttpServletRequest request,Model model,RedirectAttributes redirectAttributes) {
+	public String edit(@PathVariable("id") String id,@Valid Authority entity, BindingResult result,
+			HttpServletRequest request,Model model,RedirectAttributes redirectAttributes) {
 		
 		try {
 			if (result.hasErrors()) {

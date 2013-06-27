@@ -69,11 +69,11 @@ public class UserInfoController extends ControllerSupport {
 			query = new HQLQuery().table("select u from UserInfo u join u.roles role")
 									.like("username", request.getParameter("name"))
 									.eq("role.id", request.getParameter("roleId"))
-									.orderBy("u.username");
+									.orderBy("u.updatedAt");
 		} else {
 			query = new HQLQuery().table("UserInfo")
 									.like("username", request.getParameter("name"))
-									.orderBy("username");
+									.orderBy("updatedAt");
 		}
 		page = userInfoService.queryPage(page, query.hql(), query.values());
 		model.addAttribute(page).addAttribute("roleList", roleService.query("from Role"));
@@ -132,6 +132,8 @@ public class UserInfoController extends ControllerSupport {
 	}
 
 	/**
+	 * 修改用戶信息
+	 * 此处有bug，因为@Valid进行做验证，但是一旦用到，password不通过，
 	 * @param id
 	 * @param request
 	 * @return
@@ -161,6 +163,8 @@ public class UserInfoController extends ControllerSupport {
 				entity.setPassword(origPassword);
 			}
 			entity.setUpdatedAt(new Date());
+			
+			
 			userInfoService.store(entity);
 			success(redirectAttributes,"用户修改成功！");
 		} catch (Exception e) {

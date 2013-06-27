@@ -77,7 +77,7 @@ public class RoleController extends ControllerSupport {
 			error(model, "创建角色失败，请核对数据!");
 			return FORM;
 		}
-
+		//進行組裝：Map<String, String> authorityMap 是接受參數，然後賦值給 Set<Authority> authorities
 		HibernateHelper.mergeByIds(
 									entity.getAuthorities(),
 									entity.getAuthorityMap().values(),
@@ -98,7 +98,7 @@ public class RoleController extends ControllerSupport {
 	public String edit(@PathVariable("id") String id, Model model) {
 
 		model.addAttribute("_method", "put")
-				.addAttribute(roleService.get(id).fillupAuthorityMap())
+				.addAttribute(roleService.get(id).fillupAuthorityMap()) //組裝Map<String, String> authorityMap用于显示角色checkbox
 				.addAttribute("authorityList", authorityService.query("from Authority"));
 		return FORM;
 	}
@@ -110,11 +110,16 @@ public class RoleController extends ControllerSupport {
 	 * @return
 	 */
 	@RequestMapping(value = "/edit/{id}", method = RequestMethod.PUT)
-	public String edit(@PathVariable("id") String id, HttpServletRequest request,RedirectAttributes redirectAttributes) {
+	public String edit(@PathVariable("id") String id, @Valid Role entity,BindingResult result,
+			HttpServletRequest request,Model model,RedirectAttributes redirectAttributes) {
 		try {
-			Role entity = roleService.get(id);
-			bind(request, entity);
-
+			if (result.hasErrors()) {
+				error(model, "修改角色失败，请核实数据后重新提交！");
+				model.addAttribute("_method", "put")
+					.addAttribute("authorityList", authorityService.query("from Authority"));
+				return FORM;
+			}
+			
 			HibernateHelper.mergeByIds(
 										entity.getAuthorities(),
 										entity.getAuthorityMap().values(),
@@ -123,6 +128,7 @@ public class RoleController extends ControllerSupport {
 			roleService.store(entity);
 			success(redirectAttributes,"角色修改成功！");
 		} catch (Exception e) {
+			this.getLogger().error("修改角色失败，请核实数据后重新提交！", e);
 			error(redirectAttributes,"修改角色失败，请核实数据后重新提交！");
 		}
 
