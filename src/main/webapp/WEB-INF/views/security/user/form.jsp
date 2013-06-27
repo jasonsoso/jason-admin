@@ -83,6 +83,14 @@
 			        <form:errors path="email" cssClass="formError" />
 			    </div>
 			  </div>
+			  <div class="control-group">
+                <label class="control-label" for="accountNonLocked">是否锁定</label>
+                <div class="controls">
+                    <form:radiobutton  path="accountNonLocked" value="true" placeholder="accountNonLocked" label="未鎖"/>
+                    
+                    <form:radiobutton  path="accountNonLocked" value="false" placeholder="accountNonLocked" label="锁定"/>
+                </div>
+              </div>
 			  <div class="control-group boolean optional">
 			    <label class="control-label" for="priority">角色</label>
 			    <div class="controls">

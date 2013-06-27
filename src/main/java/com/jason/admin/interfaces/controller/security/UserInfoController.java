@@ -69,11 +69,11 @@ public class UserInfoController extends ControllerSupport {
 			query = new HQLQuery().table("select u from UserInfo u join u.roles role")
 									.like("username", request.getParameter("name"))
 									.eq("role.id", request.getParameter("roleId"))
-									.orderBy("u.updatedAt");
+									.orderBy("u.updatedAt desc");
 		} else {
 			query = new HQLQuery().table("UserInfo")
 									.like("username", request.getParameter("name"))
-									.orderBy("updatedAt");
+									.orderBy("updatedAt desc");
 		}
 		page = userInfoService.queryPage(page, query.hql(), query.values());
 		model.addAttribute(page).addAttribute("roleList", roleService.query("from Role"));
