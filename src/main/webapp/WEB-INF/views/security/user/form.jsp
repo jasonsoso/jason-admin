@@ -75,12 +75,7 @@
                     <p class="help-block">必填.密码最少6个字符串！</p>
 			    </div>
 			  </div>
-			  <div class="control-group">
-			    <label class="control-label" for="confirmPassword">*密码确认</label>
-			    <div class="controls">
-			        <input id="confirmPassword" name="confirmPassword" type="password" placeholder="confirmPassword" value="${userInfo.password}" class="input5 fontMar"/>
-			    </div>
-			  </div>
+			  
 			  <div class="control-group">
 			    <label class="control-label" for="email">*Email</label>
 			    <div class="controls">
@@ -92,7 +87,9 @@
 			    <label class="control-label" for="priority">角色</label>
 			    <div class="controls">
 			        <c:forEach var="role" items="${roleList }">
-						<form:checkbox path="roleMap[${role.id }]" value="${role.id}" label="  ${role.name }"/>
+			            <label class="checkbox inline">
+						  <form:checkbox path="roleMap[${role.id }]" value="${role.id}" label="${role.name } "/>
+						</label>
 					</c:forEach>
 			    </div>
 			  </div>

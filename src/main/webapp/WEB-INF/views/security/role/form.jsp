@@ -61,11 +61,10 @@
 			    <div class="controls">
 			        <form:input path="name"  placeholder="name"/>
 			        <form:errors path="name" cssClass="formError"/>
-			    	<p class="help-block">必填.</p>
 			    </div>
 			  </div>
 			  <div class="control-group">
-			    <label class="control-label" for="showName">显示名称</label>
+			    <label class="control-label" for="showName">*显示名称</label>
 			    <div class="controls">
 			      <form:input path="showName"  placeholder="showName"/>
 			      <form:errors path="showName" cssClass="formError"/>
@@ -75,7 +74,9 @@
 			    <label class="control-label" for="priority">资源</label>
 			    <div class="controls">
 			        <c:forEach var="authority" items="${authorityList }">
-						<form:checkbox path="authorityMap[${authority.id }]" value="${authority.id}" label="  ${authority.name }" />
+			           <label class="checkbox inline">
+						<form:checkbox path="authorityMap[${authority.id }]" value="${authority.id}" label="${authority.name }  " />
+					   </label>
 					</c:forEach>
 			    </div>
 			  </div>

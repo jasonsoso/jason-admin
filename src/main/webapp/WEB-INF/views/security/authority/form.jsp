@@ -60,7 +60,6 @@
 			    <div class="controls">
 			        <form:input path="name"  placeholder="name"/>
 			        <form:errors path="name" cssClass="formError"/>
-			    	<p class="help-block">必填.</p>
 			    </div>
 			  </div>
 			  <div class="control-group">
@@ -68,7 +67,6 @@
 			    <div class="controls">
 			        <form:input path="permission"  placeholder="permission"/>
 			        <form:errors path="permission" cssClass="formError"/>
-			    	<p class="help-block">必填.</p>
 			    </div>
 			  </div>
 			  
