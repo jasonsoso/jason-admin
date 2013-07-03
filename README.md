@@ -1,2 +1,2 @@
 ## Introduction ##
-管理系統
+Site Background Management System --- 网站后台管理系统
