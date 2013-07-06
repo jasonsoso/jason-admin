@@ -38,22 +38,18 @@
 	              <span>列表</span>
 	            </a>
 	          </li>
-	          <shiro:hasPermission name="authority:create">
 	          <li title="新增"  class="icon new_collection_link ">
 	            <a class="pjax" href="${ctx }/security/authority/create">
 	              <i class="icon-plus"></i>
 	              <span>新增</span>
 	            </a>
 	          </li>
-	          </shiro:hasPermission>
-	          <shiro:hasPermission name="authority:delete">
 	          <li id="deleteId" title="删除"  class="icon new_collection_link ">
 	            <a class="pjax" href="javascript:;">
 	              <i class="icon-remove"></i>
 	              <span>删除</span>
 	            </a>
 	          </li>
-	          </shiro:hasPermission>
 			</ul>
 
 			<form id="myForm" action="${ctx }/security/authority/list" method="get">
