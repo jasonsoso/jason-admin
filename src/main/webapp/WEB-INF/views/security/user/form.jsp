@@ -6,6 +6,7 @@
     <title>杰森博客 管理后台</title>
     <%@include file="/common/taglibs.jsp" %>
 	<%@include file="/common/common-header.jsp" %>
+	<link href="${ctx }/resources/bootstrap/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
 </head>
 <body>
 	<%@include file="/WEB-INF/views/admin/header.jsp" %>
@@ -84,6 +85,18 @@
 			    </div>
 			  </div>
 			  <div class="control-group">
+                <label class="control-label" for="email">出生日期</label>
+                <div class="controls">
+                    <div id="datetimepicker4" class="input-append">
+                        <form:input path="birth"   placeholder="birth" data-format="yyyy-MM-dd"/>
+                        <span class="add-on">
+				        <i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
+				        </span>
+				  </div>
+				  <form:errors path="birth" cssClass="formError" />
+                </div>
+              </div>
+			  <div class="control-group">
                 <label class="control-label" for="accountNonLocked">是否锁定</label>
                 <div class="controls">
                     <form:radiobutton  path="accountNonLocked" value="true" placeholder="accountNonLocked" label="未鎖"/>
@@ -114,8 +127,14 @@
 	<%@include file="/WEB-INF/views/admin/footer.jsp" %>
     </div>
 <%@include file="/common/common-footer.jsp" %>
+<script src="${ctx }/resources/bootstrap/js/bootstrap-datetimepicker.min.js"></script>
 <script type="text/javascript">
 	$(function(){
+		$('#datetimepicker4').datetimepicker({
+			  
+		      pickTime: false
+		});
+		 
 		load();
 		function load(){
 			$('#user_list').addClass('active');
