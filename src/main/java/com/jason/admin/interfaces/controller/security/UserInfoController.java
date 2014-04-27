@@ -21,7 +21,7 @@ import com.jason.framework.domain.EntityUtils;
 import com.jason.framework.orm.Page;
 import com.jason.framework.orm.hibernate.HibernateHelper;
 import com.jason.framework.orm.hibernate.query.HQLQuery;
-import com.jason.framework.util.MD5Utils;
+import com.jason.framework.util.EncryptUtils;
 import com.jason.framework.web.support.ControllerSupport;
 import com.jason.security.model.Role;
 import com.jason.security.model.UserInfo;
@@ -108,7 +108,7 @@ public class UserInfoController extends ControllerSupport {
 									entity.getRoleMap().values(),
 									Role.class
 								);
-		entity.encodePassword(MD5Utils.encode(entity.getPassword()));
+		entity.encodePassword(EncryptUtils.md5(entity.getPassword()));
 		Date now = new Date();
 		entity.setCreatedAt(now).setUpdatedAt(now);
 		userInfoService.store(entity);
@@ -157,7 +157,7 @@ public class UserInfoController extends ControllerSupport {
 									);
 			/* user has modified password*/
 			if (passwordHasModified(origPassword, entity.getPassword())) {
-				entity.encodePassword(MD5Utils.encode(entity.getPassword()));
+				entity.encodePassword(EncryptUtils.md5(entity.getPassword()));
 			} else { 
 				/* user didnot want to modify password*/
 				entity.setPassword(origPassword);
