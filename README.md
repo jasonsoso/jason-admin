@@ -1,4 +1,5 @@
 ## Introduction ##
+
 Site Background Management System --- 网站后台管理系统	
 依赖两个工程包 
 [JasonFramewok](https://github.com/jasonsoso/jason-framework "jason-framework")
@@ -11,6 +12,7 @@ Site Background Management System --- 网站后台管理系统
 
 
 ## Clone and install ##
+
 `git clone https://github.com/jasonsoso/jason-admin.git`   
 `cd jason-admin`   
 `mvn clean compile`   
@@ -18,3 +20,7 @@ Site Background Management System --- 网站后台管理系统
 
 call the `http://localhost:8087` url  
 
+
+## The effect ##
+
+![菜单](src/main/webapp/resources/images/admin.png)
