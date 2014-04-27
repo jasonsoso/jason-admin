@@ -5,7 +5,7 @@ Site Background Management System --- 网站后台管理系统
 [JasonFramewok](https://github.com/jasonsoso/jason-framework "jason-framework")
 和
 [JasonSecurity](https://github.com/jasonsoso/jason-security "jason-security")
-先后台管理系统暂时有权限功能和系统管理（用户管理，角色管理，权限管理）		
+，后台管理系统暂时有权限功能和系统管理（用户管理，角色管理，权限管理）		
 需要工程 
 [jason-sso](https://github.com/jasonsoso/jason-sso.git "jason-sso")
 跑起来，因为需要登录！呵呵。。。
