@@ -38,7 +38,8 @@
                 
 	            /admin/** = authc
 	            
-	            /security/** = authc,roles[admin]
+	            #/security/** = authc,roles[admin]
+	            /security/** = authc
 	            
 	             #/security/authority/list** = authc,perms[authority:list]
 	             #/security/authority/create** = authc,perms[authority:create]
