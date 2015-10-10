@@ -14,7 +14,7 @@
 	<!-- Shiro Filter -->
 	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
     	<property name="securityManager" ref="securityManager"/>
-	    <property name="loginUrl" value="${sso.loginurlpre}/login?service=${sso.currurlpre}/shiro-cas" /> 
+	    <property name="loginUrl" value="${sso.currurlpre}" /> 
 
 	    <!-- 要求登录时的链接 
         <property name="loginUrl" value="/login" />-->
