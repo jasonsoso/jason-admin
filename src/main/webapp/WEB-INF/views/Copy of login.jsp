@@ -13,37 +13,8 @@
 <script type="text/javascript">
 $(document).ready(function(){   
     flushLoginTicket();  // 进入登录页，则获取login ticket，该函数在下面定义。  
-    
-    var code = "${param.code}";
-    if(code){
-        try{
-            var codeAsInt = parseInt(code , 10);
-            switch(codeAsInt){
-            case 1:
-                showError("无效的用户名密码！");
-                break;
-            case 2:
-                showError("该用户已被锁定！");
-                break;
-            case 4:
-                showError("无效的用户名密码！");
-                break;
-            case 8:
-                showError("验证码错误！");
-                break;
-            default:
-                showError("未知错误！");
-                break;
-            }
-        }catch(e){
-            showError("未知错误！");
-        }
-    };
 });
 
-var showError = function(msg){
-    $('#J_ErrorMsg').fadeOut().text(msg).fadeIn();
-};
 //登录验证函数, 由 onsubmit 事件触发  
 var loginValidate = function(){
     var msg;
@@ -66,7 +37,7 @@ var loginValidate = function(){
         $('#J_ErrorMsg').fadeOut().text("服务器正忙，请稍后再试..").fadeIn();
         return false;  
     } else {  
-        /* var _services = 'service=' + encodeURIComponent('http://admin.jasonsoso.com:8087/shiro-cas');
+        var _services = 'service=' + encodeURIComponent('http://admin.jasonsoso.com:8087/shiro-cas');
         var url = 'http://sso.jasonsoso.com:9090/login?' + _services + '&n=' + new Date().getTime();
 
         var data = {username: username, password: password,isajax:true,isframe:false,
@@ -91,42 +62,24 @@ var loginValidate = function(){
             error: function(){
                 alert('服务器繁忙，请刷新页面。。。');
             }
-        });         */
-     // 验证成功后，动态创建用于提交登录的 iframe  
-        /* $('body').append($('<iframe/>').attr({  
-            style: "display:none;width:0;height:0",   
-            id: "ssoLoginFrame",  
-            name: "ssoLoginFrame",  
-            src: "javascript:false;"  
-        }));  */
+        });        
         return true;  
     }  
 }  
   
-//登录处理回调函数，将由 iframe 中的页同自动回调  
+// 登录处理回调函数，将由 iframe 中的页同自动回调  
 var feedBackUrlCallBack = function (result) {  
     customLoginCallBack(result);  
-    deleteIFrame('#ssoLoginFrame');// 删除用完的iframe,但是一定不要在回调前删除，Firefox可能有问题的  
+    //deleteIFrame('#ssoLoginFrame');// 删除用完的iframe,但是一定不要在回调前删除，Firefox可能有问题的  
 };  
   
-  
-//自定义登录回调逻辑  
-var customLoginCallBack = function(result){  
-    // 登录失败，显示错误信息  
-    if (result.login == 'fails'){  
-        $('#J_ErrorMsg').fadeOut().text(result.msg).fadeIn();  
-        // 重新刷新 login ticket  
-        flushLoginTicket();  
-    }  
-    // do more....  
-}  
   
 var deleteIFrame = function (iframeName) {  
     var iframe = $(iframeName);   
     if (iframe) { // 删除用完的iframe，避免页面刷新或前进、后退时，重复执行该iframe的请求  
         iframe.remove()  
     }  
-};   
+};  
   
 // 由于一个 login ticket 只允许使用一次, 当每次登录需要调用该函数刷新 lt  
 var flushLoginTicket = function(){
@@ -161,17 +114,18 @@ var flushLoginTicket = function(){
 <!-- 导入头部 -->
 <%@include file="/WEB-INF/views/admin/header.jsp" %>
 
-<form action="http://sso.jasonsoso.com:9090/login?service=http://admin.jasonsoso.com:8087/shiro-cas" method="post" onsubmit="return loginValidate();">  
+<!-- <form action="http://sso.jasonsoso.com:9090/login?service=http://admin.jasonsoso.com:8087/shiro-cas" method="post" onsubmit="return loginValidate();" target="ssoLoginFrame">  
+ -->
     <ul>  
         <span class="red" style="height:12px;" id="J_ErrorMsg"></span>  
   
         <li>  
             <em>用户名：</em>  
-            <input name="username" id="J_Username" type="text" autocomplete="off" class="line" style="width: 180px" />  
+            <input name="username" id="J_Username" type="text" value="jasonsoso" autocomplete="off" class="line" style="width: 180px" />  
         </li>  
         <li>  
             <em>密 码：</em>  
-            <input name="password" type="password"  id="J_Password" class="line" style="width: 180px" />  
+            <input name="password" type="password"  value="jasonsoso" id="J_Password" class="line" style="width: 180px" />  
         </li>  
   
         <!-- <li class="mai">  
@@ -182,16 +136,13 @@ var flushLoginTicket = function(){
         </li>   -->
         <li>  
             <em>&nbsp;</em>  
-            <input type="hidden" name="isajax" value="true" />  
-            <input type="hidden" name="isframe" value="true" />  
             <input type="hidden" name="lt" value="" id="J_LoginTicket">
             <input type="hidden" name="execution" value="" id="J_Execution">
-            <input type="hidden" name="_eventId" value="submit" />
             <input type="hidden" name="service" value="http://admin.jasonsoso.com:8087/shiro-cas">
-            <input name="" type="submit" value="登录" class="loginbanner" />  
+            <input name="" type="button" value="登录" class="loginbanner" onclick="loginValidate()" />  
         </li>  
-    </ul>
-</form>
+    </ul>  
+<!-- </form>  --> 
 
 <%-- 
  <!-- Carousel
